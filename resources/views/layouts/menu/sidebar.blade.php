@@ -12,12 +12,6 @@
                 <x-item-sidebar item="Dashboard" route="app.index" notification="3">
                     <x-fas-chart-pie class="w-5 h-5 text-gray-300"/>
                 </x-item-sidebar>
-                <x-item-sidebar item="Dashboard" route="app.index" notification="3">
-                    <x-fas-chart-pie class="w-5 h-5 text-gray-300"/>
-                </x-item-sidebar>
-                <x-item-sidebar item="Dashboard" route="app.index" notification="3">
-                    <x-fas-chart-pie class="w-5 h-5 text-gray-300"/>
-                </x-item-sidebar>
             </ul>
         </div>
         <div id="dropdown-cta" class="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-blue-900" role="alert">
