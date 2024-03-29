@@ -69,3 +69,7 @@ sail npm run dev
 Si todo está correcto puede acceder al proyecto en la dirección http://localhost:8000 con el usuario admin@admin.com - Admin. 
 
 También puede verificar si la API está funcionando en la dirección http://localhost:8000/api/v1/login con el mismo usuario, el sistema retornará una respuesta con el token de autorización.
+
+---
+[Jorge Edo. Hernández](https://github.com/jorgehernandezch)  
+_Ingeniero y Desarrollador Web_
