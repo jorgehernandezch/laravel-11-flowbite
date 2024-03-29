@@ -6,11 +6,14 @@
         <div>
             <a href="https://flowbite.com/" class="flex items-center ps-2.5 mb-5">
                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Flowbite</span>
+                <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Insejec</span>
             </a>
             <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-600">
-                <x-item-sidebar item="Dashboard" route="app.index" notification="3">
+                <x-item-sidebar item="Dashboard" path="/app">
                     <x-fas-chart-pie class="w-5 h-5 text-gray-300"/>
+                </x-item-sidebar>
+                <x-item-sidebar item="Usuarios" path="/app/users">
+                    <x-fas-users class="w-5 h-5 text-gray-300"/>
                 </x-item-sidebar>
             </ul>
         </div>

@@ -1,8 +1,5 @@
-<li>
-    <a {{ $attributes->merge([
-        'class' => 'flex items-center p-2 text-gray-900 rounded-lg',
-        'href' => route($route),
-    ]) }}>
+<li class="hover:bg-gray-600 transition {{ '/'.Request::path() == $path ? 'bg-cyan-800' : 'bg-transparent' }}">
+    <a class="flex items-center p-2 text-gray-900 rounded-lg" href="{{ $path }}">
         {{ $slot }}
         <span class="flex-1 ms-3 whitespace-nowrap text-white">{{ $item }}</span>
         @isset($notification)
