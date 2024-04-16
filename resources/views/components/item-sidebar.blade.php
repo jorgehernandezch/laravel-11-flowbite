@@ -1,4 +1,4 @@
-<li class="hover:bg-gray-600 transition {{ '/'.Request::path() == $path ? 'bg-cyan-800' : 'bg-transparent' }}">
+<li class="hover:bg-gray-600 transition rounded-md {{ '/'.Request::path() == $path ? 'bg-primary' : 'bg-transparent' }}">
     <a class="flex items-center p-2 text-gray-900 rounded-lg" href="{{ $path }}">
         {{ $slot }}
         <span class="flex-1 ms-3 whitespace-nowrap text-white">{{ $item }}</span>

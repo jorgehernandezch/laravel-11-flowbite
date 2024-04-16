@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\App\IndexController;
 use App\Http\Controllers\App\ProfileController;
+use App\Http\Controllers\App\UserController;
+use App\Http\Controllers\App\CelulaController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('app.')->group(function () {
@@ -12,4 +14,9 @@ Route::name('app.')->group(function () {
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
     });
+
+    Route::resources([
+        'users' => UserController::class,
+        'celulas' => CelulaController::class,
+    ]);
 });

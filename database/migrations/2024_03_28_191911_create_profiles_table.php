@@ -13,7 +13,23 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('avatar')->nullable();
+            $table->string('cpf')->unique()->nullable();
+            $table->string('telefone')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('data_nascimento')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('endereco')->nullable();
+            $table->string('complemento')->nullable();
+            $table->string('cidade')->nullable();
+            $table->string('uf', 2)->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->text('hobbies')->nullable();
+            $table->text('about_me')->nullable();
             $table->timestamps();
         });
     }

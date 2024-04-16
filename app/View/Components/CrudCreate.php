@@ -6,14 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class GuestLayout extends Component
+class CrudCreate extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $title = 'title';
+    public $return;
+    public function __construct($title, $return = false)
     {
-        //
+        $this->title = $title;
+        $this->return = $return;
     }
 
     /**
@@ -21,6 +21,6 @@ class GuestLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.guest');
+        return view('layouts.crud.create');
     }
 }
