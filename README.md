@@ -1,4 +1,4 @@
-# Laravel 10 All Flowbite
+# Laravel 11 All Flowbite
 
 ## Comenzando 🚀
 
@@ -22,7 +22,7 @@ Sigue las siguientes instrucciones para clonar el repositorio
 
 _Clone el repositorio_
 ```
-git clone https://github.com/jorgehernandezch/laravel-10-flowbite.git
+git clone https://github.com/jorgehernandezch/laravel-11-flowbite.git
 ```
 _Copie el archivo .env.example en un archivo nuevo .env con_
 ```
@@ -38,7 +38,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
-    laravelsail/php82-composer:latest \
+    laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 ```
 
