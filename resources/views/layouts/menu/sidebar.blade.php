@@ -1,39 +1,196 @@
-<aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" 
-    aria-label="Sidebar"
-    id="logo-sidebar"
+@php
+    $url = request()->url();
+    $segments = explode('/', $url);
+    //dd($segments, count($segments));
+    count($segments) == 4 ? $segment = $segments[3] : $segment = $segments[4];
+    
+@endphp
+<!-- Sidebar -->
+<aside
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full md:translate-x-0 bg-gray-800"
+    aria-label="Sidenav"
+    id="drawer-navigation"
 >
-    <div class="h-full px-3 py-4 overflow-y-auto bg-secondary flex flex-col justify-between">
-        <div>
-            <a href="https://insejecsj.com.br/" class="flex items-center mb-2" target="_blank">
-                <img src="{{ asset('assets/img/logo.svg') }}" class="h-6" alt="Insejec Logo" />
-                {{-- <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Insejec</span> --}}
-            </a>
-            <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-600">
-                <x-item-sidebar item="Dashboard" path="/app">
-                    <x-fas-chart-pie class="w-5 h-5 text-gray-300"/>
-                </x-item-sidebar>
-                <x-item-sidebar item="Usuarios" path="/app/users">
-                    <x-fas-users class="w-5 h-5 text-gray-300"/>
-                </x-item-sidebar>
-                <x-item-sidebar item="Celulas" path="/app/celulas">
-                    <x-fas-house-user class="w-5 h-5 text-gray-300"/>
-                </x-item-sidebar>
-            </ul>
-        </div>
-        <div id="dropdown-cta" class="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-blue-900" role="alert">
-            <div class="flex items-center mb-3">
-                <span class="bg-orange-100 text-orange-800 text-sm font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-orange-200 dark:text-orange-900">Beta</span>
-                <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 inline-flex justify-center items-center w-6 h-6 text-blue-900 rounded-lg focus:ring-2 focus:ring-blue-400 p-1 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-400 dark:hover:bg-blue-800" data-dismiss-target="#dropdown-cta" aria-label="Close">
-                    <span class="sr-only">Close</span>
-                    <svg class="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                </button>
+    <div class="overflow-y-auto py-5 px-3 h-full bg-gray-800">
+        <form action="#" method="GET" class="md:hidden mb-2">
+            <label for="sidebar-search" class="sr-only">Search</label>
+            <div class="relative">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input
+                    type="text"
+                    name="search"
+                    id="sidebar-search"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2"
+                    placeholder="Search"
+                />
             </div>
-            <p class="mb-3 text-sm text-blue-800 dark:text-blue-400">
-                Preview the new Flowbite dashboard navigation! You can turn the new navigation off for a limited time in your profile.
-            </p>
-            <a class="text-sm text-blue-800 underline font-medium hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" href="#">Turn new navigation off</a>
+        </form>
+        <ul class="space-y-2">
+            <x-item-sidebar 
+                route="app.index" 
+                item="Dashboard"
+                class="{{ $segment == 'app' ? 'bg-gradient-to-l from-sky-400 via-sky-500 to-sky-600 text-white hover:bg-gradient-to-br ' : '' }}"
+            >
+                <i class="fa-solid fa-chart-pie"></i>
+            </x-item-sidebar>
+        </ul>
+        <ul class="mt-4 pt-4 space-y-2 border-t border-gray-600">
+            <x-item-sidebar 
+                route="app.users.index" 
+                item="Users" 
+                class="{{ $segment == 'users' ? 'bg-gradient-to-l from-sky-400 via-sky-500 to-sky-600 text-white hover:bg-gradient-to-br' : '' }}"
+            >
+                <i class="fa-solid fa-person-circle-check"></i>
+            </x-item-sidebar>
+        </ul>
+    </div>
+    <div class="hidden absolute bottom-0 left-0 justify-center p-4 w-full lg:flex bg-gray-800 z-20 border-t border-gray-600">
+        <a
+            href="#"
+            data-tooltip-target="tooltip-settings"
+            class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
+        >
+            <i class="fa-solid fa-gear"></i>
+        </a>
+        <div 
+            id="tooltip-settings"
+            role="tooltip"
+            class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
+        >
+            Settings page
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button
+            type="button"
+            data-dropdown-toggle="language-dropdown"
+            class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100"
+        >
+            <i class="fa-brands fa-whatsapp"></i>
+        </button>
+        <!-- Dropdown -->
+        <div
+            class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
+            id="language-dropdown"
+        >
+        <ul class="py-1" role="none">
+            <li>
+                <a
+                    href="#"
+                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                >
+                    <div class="inline-flex items-center">
+                        English (US)
+                    </div>
+                </a>
+            </li>
+            <li>
+            <a
+                href="#"
+                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+            >
+                <div class="inline-flex items-center">
+                <svg
+                    aria-hidden="true"
+                    class="h-3.5 w-3.5 rounded-full mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="flag-icon-css-de"
+                    viewBox="0 0 512 512"
+                >
+                    <path fill="#ffce00" d="M0 341.3h512V512H0z" />
+                    <path d="M0 0h512v170.7H0z" />
+                    <path fill="#d00" d="M0 170.7h512v170.6H0z" />
+                </svg>
+                Deutsch
+                </div>
+            </a>
+            </li>
+            <li>
+            <a
+                href="#"
+                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-600"
+                role="menuitem"
+            >
+                <div class="inline-flex items-center">
+                <svg
+                    aria-hidden="true"
+                    class="h-3.5 w-3.5 rounded-full mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="flag-icon-css-it"
+                    viewBox="0 0 512 512"
+                >
+                    <g fill-rule="evenodd" stroke-width="1pt">
+                    <path fill="#fff" d="M0 0h512v512H0z" />
+                    <path fill="#009246" d="M0 0h170.7v512H0z" />
+                    <path fill="#ce2b37" d="M341.3 0H512v512H341.3z" />
+                    </g>
+                </svg>
+                Italiano
+                </div>
+            </a>
+            </li>
+            <li>
+            <a
+                href="#"
+                class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600"
+                role="menuitem"
+            >
+                <div class="inline-flex items-center">
+                <svg
+                    aria-hidden="true"
+                    class="h-3.5 w-3.5 rounded-full mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    id="flag-icon-css-cn"
+                    viewBox="0 0 512 512"
+                >
+                    <defs>
+                    <path
+                        id="a"
+                        fill="#ffde00"
+                        d="M1-.3L-.7.8 0-1 .6.8-1-.3z"
+                    />
+                    </defs>
+                    <path fill="#de2910" d="M0 0h512v512H0z" />
+                    <use
+                    width="30"
+                    height="20"
+                    transform="matrix(76.8 0 0 76.8 128 128)"
+                    xlink:href="#a"
+                    />
+                    <use
+                    width="30"
+                    height="20"
+                    transform="rotate(-121 142.6 -47) scale(25.5827)"
+                    xlink:href="#a"
+                    />
+                    <use
+                    width="30"
+                    height="20"
+                    transform="rotate(-98.1 198 -82) scale(25.6)"
+                    xlink:href="#a"
+                    />
+                    <use
+                    width="30"
+                    height="20"
+                    transform="rotate(-74 272.4 -114) scale(25.6137)"
+                    xlink:href="#a"
+                    />
+                    <use
+                    width="30"
+                    height="20"
+                    transform="matrix(16 -19.968 19.968 16 256 230.4)"
+                    xlink:href="#a"
+                    />
+                </svg>
+                中文 (繁體)
+                </div>
+            </a>
+            </li>
+        </ul>
         </div>
     </div>
 </aside>

@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('Admin')
-        ])->assignRole('admin');
+        ])->assignRole('superadmin');
 
         Profile::create([
             'user_id' => $user1->id
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'name' => 'Jorge Edo. Hernández',
             'email' => 'jorge@galpha.co',
             'password' => Hash::make('123.abc*')
-        ])->assignRole('user');
+        ])->assignRole('admin');
 
         Profile::create([
             'user_id' => $user2->id

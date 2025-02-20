@@ -11,6 +11,13 @@ class Profile extends Model
 
     protected $fillable = [
         'user_id',
+        'avatar',
+        'whatsapp',
+        'twitter',
+        'facebook',
+        'instagram',
+        'youtube',
+        'about_me',
     ];
 
     public function user()
