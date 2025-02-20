@@ -1,82 +1,145 @@
-@section('title', '- Usuarios')
-
-<x-crud-index 
-    model="Usuarios"
-    text="Lorem"
-    route="app.users.create"
-    :create="true"
-    :return="true" 
->
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <x-table.table :users="$users" :headers="[
-            'Name',
-            'Position',
-            'Status',
-        ]" />
-        <!-- Edit user modal -->
-        <div id="editUserModal" 
-            tabindex="-1" 
-            aria-hidden="true" 
-            class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
-        >
-            <div class="relative w-full max-w-2xl max-h-full">
-                <!-- Modal content -->
-                <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <!-- Modal header -->
-                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Edit user
-                        </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editUserModal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-6 space-y-6">
-                        <div class="grid grid-cols-6 gap-6">
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                                <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bonnie" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                                <input type="text" name="last-name" id="last-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Green" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="email" name="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@company.com" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                                <input type="number" name="phone-number" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="e.g. +(12)3456 789" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-                                <input type="text" name="department" id="department" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Development" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                                <input type="number" name="company" id="company" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123456" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="current-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Password</label>
-                                <input type="password" name="current-password" id="current-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
-                            </div>
-                            <div class="col-span-6 sm:col-span-3">
-                                <label for="new-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Password</label>
-                                <input type="password" name="new-password" id="new-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
-                    </div>
-                </form>
-            </div>
+<x-app-layout>
+    <div class="flex flex-row justify-content-between items-start">
+        <div>
+            <h2 class="font-monserrat font-bold text-xl text-gray-900">
+                System Users
+            </h2>
+            <h5 class="font-monserrat font-normal text-base text-gray-600">
+                All users registered in the system.
+            </h5>
+            <h5 class="font-monserrat font-semibold text-base text-gray-900">
+                Total Users: {{ $users->total() }}
+            </h5>
+        </div>
+        <div class="flex-1 flex justify-end gap-1">
+            @hasanyrole('root|superadmin|admin')
+                <x-buttons.new text="New User" route="app.users.create" />
+            @endhasanyrole
+            <x-buttons.dashboard />
         </div>
     </div>
-</x-crud-index>
+    <div class="overflow-x-auto shadow-md sm:rounded-lg mt-4">
+        <table class="w-full min-w-[1000px] text-sm text-left text-gray-500 rounded-lg overflow-hidden font-monserrat" id="table">
+            <thead class="text-xs text-gray-100 uppercase bg-gray-800">
+                <tr>
+                    <th scope="col" class="px-6 py-3 w-10">
+                        ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Name 
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Roles
+                    </th>
+                    <th scope="col" class="px-6 py-3 w-10">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if($users->count() != 0)
+                    @foreach($users as $user)
+                        <tr class="odd:bg-white even:bg-gray-100 h-16">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                {{ $user->id }}
+                            </th>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-gray-900 whitespace-nowrap flex-1">
+                                    <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Jese image">
+                                    <div class="ps-4 flex flex-col gap-1 whitespace-nowrap">
+                                        <p class="text-base font-regular font-monserrat">
+                                            {{ $user->name }}
+                                        </p>
+                                    </div>  
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-gray-900 whitespace-nowrap flex-1">
+                                    <div class="flex flex-col gap-1">
+                                        <p class="font-regular text-base text-gray-500 font-monserrat">
+                                            {{ $user->email }}
+                                        </p>
+                                    </div>  
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center text-gray-900 whitespace-nowrap flex-1">
+                                    <div class="flex flex-col gap-1">
+                                        <p class="font-regular text-base font-monserrat">
+                                            @foreach($user->getRoleNames() as $role)
+                                                <span class="capitalize inline-block {{ $role == 'admin' ? 'text-sky-500 font-bold' : '' }}">
+                                                    {{ $role }}
+                                                </span>
+                                            @endforeach
+                                        </p>
+                                    </div>  
+                                </div>
+                            </td>
+                            <td class="px-6">
+                                <div class="flex h-full items-center justify-center gap-1">
+                                    <a href="{{ route('app.users.show',$user->id) }}" class="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:bg-gradient-to-br w-8 h-8 p-1 rounded-md flex items-center justify-center transition-opacity">
+                                        <i class="fa-solid fa-eye text-gray-900"></i>
+                                    </a>
+                                    <a href="{{ route('app.users.edit',$user->id) }}" class="bg-gradient-to-r from-emerald-400 via-emerald-500 to-emerald-600 hover:bg-gradient-to-br w-8 h-8 p-1 rounded-md flex items-center justify-center transition-opacity">
+                                        <i class="fa-solid fa-pen-to-square text-white"></i>
+                                    </a>
+                                    @hasanyrole('root|superadmin|admin')
+                                    <a href="#" 
+                                        onclick="event.preventDefault(); confirmDelete({{ $user->id }})"
+                                        class="bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600 hover:bg-gradient-to-br w-8 h-8 p-1 rounded-md flex items-center justify-center transition-opacity">
+                                        <i class="fa-solid fa-trash text-white"></i>
+                                    </a>
+                                    <form id="delete-form-{{ $user->id }}" 
+                                        action="{{ route('app.users.destroy', $user->id) }}" 
+                                        method="POST" 
+                                        style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    @endhasanyrole
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr class="odd:bg-white even:bg-gray-100 h-16">
+                        <td class="px-6 py-4" colspan="5">
+                            <p class="text-sm font-semibold font-monserrat text-center">
+                                Não há usuarios cadastrados.
+                            </p>
+                        </td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-2">
+        {{ $users->links() }}
+    </div>
+    @include('components.alert.success',['message' => Session::get('success')])
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            function confirmDelete(userId) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede deshacer",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f43f5e',
+                    cancelButtonColor: '#6b7280',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Aquí puedes enviar el formulario o hacer la petición para eliminar
+                        document.getElementById('delete-form-' + userId).submit();
+                    }
+                });
+            }
+        </script>            
+    @endpush
+</x-app-layout>

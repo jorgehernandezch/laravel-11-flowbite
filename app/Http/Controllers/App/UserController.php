@@ -3,19 +3,25 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
+use App\Http\Traits\UserTrait;
+use App\Models\Coverage;
+use App\Models\Hobby;
+use App\Models\Process;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    use UserTrait;
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('id', 'desc')->paginate(10);
         return view('app.users.index', compact('users'));
     }
 
@@ -24,27 +30,28 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('app.users.create');
+        $roles = Role::where('id', '!=', 1)->where('id', '!=', 2)->pluck('name', 'id')->toArray();
+        return view('app.users.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make('12345678')
-        ]);
+        $role = Role::find($request->role_id);
+        if (!$role) {
+            return redirect()->back()->withErrors('Rol not found.');
+        }
 
-        Profile::create([
-            'user_id' => $user->id
-        ]);
+        $user = $this->createUser($request);
+        $user->assignRole($role->name);
 
-        return redirect()->route('app.users.edit', $user->id)->with(
+        $this->createUserProfile($user->id, $request);
+
+        return redirect()->route('app.users.index')->with(
             'success',
-            'Usuario criado'
+            'User created successfully'
         );
     }
 
@@ -53,7 +60,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::where('id', $id)->first();
+        return view('app.users.show', compact('user'));
     }
 
     /**
@@ -62,15 +70,29 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::find($id);
-        return view('app.users.edit', compact('user'));
+        $roles = Role::where('id', '!=', 1)->where('id', '!=', 2)->pluck('name', 'id')->toArray();
+
+        return view('app.users.edit', compact('user', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        //
+        $role = Role::find($request->role_id);
+        if (!$role) {
+            return redirect()->back()->withErrors('Rol not found.');
+        }
+        $user = User::findOrFail($id);
+        $this->updateUser($request, $id);
+        $user->syncRoles([$role->name]);
+        $this->updateUserProfile($user->id, $request);
+
+        return redirect()->route('app.users.index')->with(
+            'success',
+            'User updated successfully'
+        );
     }
 
     /**
@@ -78,6 +100,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('app.users.index')->with(
+            'success',
+            'User deleted successfully'
+        );
     }
 }
