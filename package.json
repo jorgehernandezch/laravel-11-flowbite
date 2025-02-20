@@ -1,9 +1,15 @@
 {
+    "name": "laravel11-flowbite",
+    "version": "1.0.0",
     "private": true,
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "release": "standard-version",
+        "release:patch": "standard-version --release-as patch",
+        "release:minor": "standard-version --release-as minor",
+        "release:major": "standard-version --release-as major"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
@@ -12,6 +18,7 @@
         "axios": "^1.7.4",
         "laravel-vite-plugin": "^1.0.0",
         "postcss": "^8.4.31",
+        "standard-version": "^9.5.0",
         "tailwindcss": "^3.1.0",
         "vite": "^5.4.14"
     },
