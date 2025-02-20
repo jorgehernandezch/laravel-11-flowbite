@@ -1,38 +1,34 @@
 # Laravel 11 All Flowbite
+## Getting Started 🚀
+*Follow these instructions to clone this repository on your local machine and start working with the Flowbite template, Spatie Roles and Permissions system, Breeze Auth, Tailwind CSS, and Docker Sail from the beginning.*
 
-## Comenzando 🚀
-
-_Sigue las siguientes instrucciones para clonar este repositorio en tu máquina local y poder trabajar desde el principio con la plantilla Flowbite, sistema de Roles y Permisos con Spatie, Breeze Auth, Tailwind CSS, y Docker Sail._
-
-### Pre-requisitos 📋
-
-Para clonar este repositorio, debes tener instalado Docker en tu computador.
-
-Antes de comenzar verifica si tienes docker con cualquiera de los siguientes comandos en tu terminal.
+### Prerequisites 📋
+To clone this repository, you must have Docker installed on your computer.
+Before starting, verify if you have Docker with any of the following commands in your terminal.
 ```
 docker --version 
 docker -v
 ```
-Si no lo tienes instalado lo pueden instalar siguiendo la documentación oficial en:  
+If you don't have it installed, you can install it following the official documentation at:  
 https://www.docker.com/products/docker-desktop/
 
-### Instalación 🔧
+### Installation 🔧
+Follow these instructions to clone the repository
 
-Sigue las siguientes instrucciones para clonar el repositorio
-
-_Clone el repositorio_
+*Clone the repository*
 ```
 git clone https://github.com/jorgehernandezch/laravel-11-flowbite.git
 ```
-_Copie el archivo .env.example en un archivo nuevo .env con_
+
+*Copy the .env.example file to a new .env file with*
 ```
 cp .env.example .env
 ```
-_Configure todas las variables de entorno en el archivo .env_
 
-En este proyecto, utilizaremos Dokcer Sail
+*Configure all environment variables in the .env file*
+In this project, we'll use Docker Sail
 
-_Instale y actualize todas las dependencias del proyecto con_
+*Install and update all project dependencies with*
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -42,34 +38,36 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-_Levantamos la imagen docker con_
+*Start the docker image with*
 ```
 sail up -d
 ```
-Caso el terminal no reconzoca el comando sail, vea la documentación oficial en:
+If the terminal doesn't recognize the sail command, see the official documentation at:
 https://laravel.com/docs/10.x/sail#configuring-a-shell-alias
 
-_Genere una nueva key para el protecto con_
+*Generate a new key for the project with*
 ```
 sail art key:generate
 ```
-_Como el proyecto tiene dependencias JS, instalelas con_
+
+*Since the project has JS dependencies, install them with*
 ```
 sail npm install
 ```
-_Corra las migraciones y seeders del proyecto con_
+
+*Run the project migrations and seeders with*
 ```
 sail art migrate --seed
 ```
-_Levante el servidor vite con_
+
+*Start the vite server with*
 ```
 sail npm run dev
 ```
 
-Si todo está correcto puede acceder al proyecto en la dirección http://localhost:8000 con el usuario admin@admin.com - Admin. 
-
-También puede verificar si la API está funcionando en la dirección http://localhost:8000/api/v1/login con el mismo usuario, el sistema retornará una respuesta con el token de autorización.
+If everything is correct, you can access the project at http://localhost:8000 with the user admin@admin.com - Admin.
+You can also verify if the API is working at http://localhost:8000/api/v1/login with the same user, the system will return a response with the authorization token.
 
 ---
 [Jorge Edo. Hernández](https://github.com/jorgehernandezch)  
-_Ingeniero y Desarrollador Web_
+_Engineer and Web Developer_
